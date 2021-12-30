@@ -1,0 +1,10 @@
+name: Build and run tests (Docker)
+
+on: [push, pull_request]
+
+jobs:
+  test-docker:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Build image
+        run: docker build .
