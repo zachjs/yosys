@@ -27,6 +27,8 @@
 #ifdef __clang__
 // bison generates code using the 'register' storage class specifier
 #pragma clang diagnostic ignored "-Wdeprecated-register"
+// flex generates a comparison between an `unsigned long` and an `int`
+#pragma clang diagnostic ignored "-Wsign-compare"
 #endif
 
 #include <cstdlib>
