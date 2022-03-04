@@ -1540,8 +1540,7 @@ struct AbcPass : public Pass {
 			show_tempdir = true;
 		}
 
-		size_t argidx, g_argidx;
-		bool g_arg_from_cmd = false;
+		size_t argidx, g_argidx = SIZE_MAX;
 #if defined(__wasm)
 		const char *pwd = ".";
 #else
@@ -1618,11 +1617,10 @@ struct AbcPass : public Pass {
 				continue;
 			}
 			if (arg == "-g" && argidx+1 < args.size()) {
-				if (g_arg_from_cmd)
+				if (g_argidx != SIZE_MAX)
 					log_cmd_error("Can only use -g once. Please combine.");
 				g_arg = args[++argidx];
 				g_argidx = argidx;
-				g_arg_from_cmd = true;
 				continue;
 			}
 			if (arg == "-fast") {
@@ -1821,7 +1819,7 @@ struct AbcPass : public Pass {
 					gate_list.push_back("NMUX");
 					goto ok_alias;
 				}
-				if (g_arg_from_cmd)
+				if (g_argidx != SIZE_MAX)
 					cmd_error(args, g_argidx, stringf("Unsupported gate type: %s", g.c_str()));
 				else
 					log_cmd_error("Unsupported gate type: %s", g.c_str());
