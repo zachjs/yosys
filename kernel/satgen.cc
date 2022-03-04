@@ -1197,7 +1197,7 @@ bool SatGen::importCell(RTLIL::Cell *cell, int timestep)
 			if (ff.has_srst && ff.has_ce && ff.ce_over_srst) {
 				int srst = importDefSigSpec(ff.sig_srst, timestep-1).at(0);
 				std::vector<int> rval = importDefSigSpec(ff.val_srst, timestep-1);
-				int undef_srst;
+				int undef_srst = 0;
 				std::vector<int> undef_rval;
 				if (model_undef) {
 					undef_srst = importUndefSigSpec(ff.sig_srst, timestep-1).at(0);
@@ -1211,7 +1211,7 @@ bool SatGen::importCell(RTLIL::Cell *cell, int timestep)
 			if (ff.has_ce) {
 				int ce = importDefSigSpec(ff.sig_ce, timestep-1).at(0);
 				std::vector<int> old_q = importDefSigSpec(ff.sig_q, timestep-1);
-				int undef_ce;
+				int undef_ce = 0;
 				std::vector<int> undef_old_q;
 				if (model_undef) {
 					undef_ce = importUndefSigSpec(ff.sig_ce, timestep-1).at(0);
@@ -1225,7 +1225,7 @@ bool SatGen::importCell(RTLIL::Cell *cell, int timestep)
 			if (ff.has_srst && !(ff.has_ce && ff.ce_over_srst)) {
 				int srst = importDefSigSpec(ff.sig_srst, timestep-1).at(0);
 				std::vector<int> rval = importDefSigSpec(ff.val_srst, timestep-1);
-				int undef_srst;
+				int undef_srst = 0;
 				std::vector<int> undef_rval;
 				if (model_undef) {
 					undef_srst = importUndefSigSpec(ff.sig_srst, timestep-1).at(0);

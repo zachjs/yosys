@@ -39,6 +39,8 @@
 #pragma clang diagnostic ignored "-Wdeprecated-register"
 // flex generates a comparison between an `unsigned long` and an `int`
 #pragma clang diagnostic ignored "-Wsign-compare"
+// clang less than 10 doesn't have the below diagnostic flag
+#pragma clang diagnostic ignored "-Wunknown-warning-option"
 // flex generates weirdly-indented code
 #pragma clang diagnostic ignored "-Wmisleading-indentation"
 #endif
